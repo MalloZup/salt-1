@@ -145,6 +145,21 @@ def get_with_expr(expr, **kwargs):
     return __salt__['caasp_grains.get'](' and '.join(expr_items)).keys()
 
 
+def get_etcd_members(**kwargs):
+    ''' Get the etcd members (accepting the same arguments as `get_with_expr`) '''
+    return get_with_expr('G@roles:etcd', **kwargs)
+
+
+def get_masters(**kwargs):
+    ''' Get the k8s masters (accepting the same arguments as `get_with_expr`) '''
+    return get_with_expr('G@roles:kube-master', **kwargs)
+
+
+def get_minions(**kwargs):
+    ''' Get the k8s minions (accepting the same arguments as `get_with_expr`) '''
+    return get_with_expr('G@roles:kube-minion', **kwargs)
+
+
 def get_from_args_or_with_expr(arg_name, args_dict, *args, **kwargs):
     '''
     Utility function for getting a list of nodes from either the kwargs
